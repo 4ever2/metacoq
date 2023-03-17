@@ -10,6 +10,7 @@ authors: ["Simon Boulier <simon.boulier@inria.fr>"
           "Théo Winterhalter <theo.winterhalter@inria.fr>"
 ]
 license: "MIT"
+version: "1.0~beta2+8.11"
 build: [
   ["sh" "./configure.sh"]
   [make "-j%{jobs}%" "-C" "translations"]

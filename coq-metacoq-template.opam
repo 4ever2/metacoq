@@ -14,6 +14,7 @@ authors: ["Abhishek Anand <aa755@cs.cornell.edu>"
           "Théo Winterhalter <theo.winterhalter@inria.fr>"
 ]
 license: "MIT"
+version: "1.0~beta2+8.11"
 build: [
   ["sh" "./configure.sh"]
   [make "-j%{jobs}%" "template-coq"]
