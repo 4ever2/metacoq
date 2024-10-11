@@ -31,17 +31,17 @@
 
   ## select an entry to build in the following `bundles` set
   ## defaults to "default"
-  default-bundle = "coq-dev";
+  default-bundle = "coq-8.19";
 
   # MetaCoq is expected to be compatible with a single coq version
   # The name of the bundle should finish with the coq version to use
   # cachedMake.sh
-  bundles."coq-dev" = {
+  bundles."coq-8.19" = {
 
     ## You can override Coq and other Coq coqPackages
     ## through the following attribute
-    coqPackages.coq.override.version = "master";
-    coqPackages.equations.override.version = "main";
+    coqPackages.coq.override.version = "8.19";
+    coqPackages.equations.override.version = "1.3+8.19";
 
     ## In some cases, light overrides are not available/enough
     ## in which case you can use either
@@ -83,7 +83,6 @@
   ## Cachix caches to use in CI
   ## Below we list some standard ones
   cachix.coq = {};
-  # cachix.math-comp = {};
   cachix.coq-community = {};
 
   ## If you have write access to one of these caches you can
@@ -91,7 +90,7 @@
   ## variable on GitHub. Then, you should give the variable
   ## name here. For instance, coq-community projects can use
   ## the following line instead of the one above:
-  cachix.metacoq.authToken = "CACHIX_AUTH_TOKEN";
+  # cachix.metacoq.authToken = "CACHIX_AUTH_TOKEN";
 
   ## Or if you have a signing key for a given Cachix cache:
   # cachix.my-cache.signingKey = "CACHIX_SIGNING_KEY"
