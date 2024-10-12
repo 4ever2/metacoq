@@ -43,6 +43,12 @@
     coqPackages.coq.override.version = "8.19";
     coqPackages.equations.override.version = "1.3+8.19";
 
+    coqPackages.metacoq.main-job = true;
+
+    coqPackages.ElmExtraction.override.version = "master";
+
+    push-branches = ["coq-8.19"];
+
     ## In some cases, light overrides are not available/enough
     ## in which case you can use either
     # coqPackages.<coq-pkg>.overrideAttrs = o: <overrides>;
