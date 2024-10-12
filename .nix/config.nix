@@ -43,6 +43,26 @@
     coqPackages.coq.override.version = "8.19";
     coqPackages.equations.override.version = "1.3+8.19";
 
+    coqPackages.metacoq.main-job = true;
+    # coqPackages.metacoq.override.version = "1.3.2-8.19";
+
+    #coqPackages.metacoq-utils.job = false;
+    #coqPackages.metacoq-common.job = false;
+    #coqPackages.metacoq-template-coq.job = false;
+    #coqPackages.metacoq-pcuic.job = false;
+    #coqPackages.metacoq-safechecker.job = false;
+    #coqPackages.metacoq-template-pcuic.job = false;
+    #coqPackages.metacoq-erasure.job = false;
+    #coqPackages.metacoq-quotation.job = false;
+    #coqPackages.metacoq-safechecker-plugin.job = false;
+    #coqPackages.metacoq-erasure-plugin.job = false;
+
+    push-branches = ["coq-8.19"];
+
+    # coqPackages.ElmExtraction.override.version = "coq-8.19";
+    coqPackages.ElmExtraction.override.version = "master";
+    # coqPackages.ElmExtraction.job = false;
+  
     ## In some cases, light overrides are not available/enough
     ## in which case you can use either
     # coqPackages.<coq-pkg>.overrideAttrs = o: <overrides>;

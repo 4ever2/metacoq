@@ -39,7 +39,7 @@ let
   releaseRev = v: "v${v}";
 
   # list of core metacoq packages sorted by dependency order
-  packages = if lib.versionAtLeast coq.coq-version "8.17" || coq.coq-version == "dev"
+  packages = if (lib.versionAtLeast coq.coq-version "8.17" || coq.coq-version == "dev")
      then [ "utils" "common" "template-coq" "pcuic" "safechecker" "template-pcuic" "erasure" "quotation" "safechecker-plugin" "erasure-plugin" "all" ]
      else [ "template-coq" "pcuic" "safechecker" "erasure" "all" ];
 
@@ -48,7 +48,7 @@ let
   metacoq_ = package: let
       metacoq-deps = lib.optionals (package != "single") (map metacoq_ (lib.head (lib.splitList (lib.pred.equal package) packages)));
       pkgpath = if package == "single" then "./" else "./${package}";
-      pname = if package == "all" then "metacoq" else "metacoq-${package}";
+      pname = if package == "single" then "metacoq" else "metacoq-${package}";
       pkgallMake = ''
           mkdir all
           echo "all:" > all/Makefile
