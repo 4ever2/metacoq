@@ -59,8 +59,8 @@
 
     push-branches = ["coq-8.19"];
 
-    # coqPackages.ElmExtraction.override.version = "coq-8.19";
-    coqPackages.ElmExtraction.override.version = "hdsds";
+    coqPackages.ElmExtraction.override.version = "coq-8.19";
+    # coqPackages.ElmExtraction.override.version = "hdsds";
     # coqPackages.ElmExtraction.job = false;
   
     ## In some cases, light overrides are not available/enough
