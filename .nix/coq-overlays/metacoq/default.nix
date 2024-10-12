@@ -48,7 +48,7 @@ let
   metacoq_ = package: let
       metacoq-deps = lib.optionals (package != "single") (map metacoq_ (lib.head (lib.splitList (lib.pred.equal package) packages)));
       pkgpath = if package == "single" then "./" else "./${package}";
-      pname = if package == "all" then "metacoq" else "metacoq-${package}";
+      pname = if package == "single" then "metacoq" else "metacoq-${package}";
       pkgallMake = ''
           mkdir all
           echo "all:" > all/Makefile
