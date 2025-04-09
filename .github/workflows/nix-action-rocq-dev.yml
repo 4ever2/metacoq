@@ -27,11 +27,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v30
+      uses: cachix/install-nix-action@v31
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup metacoq
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, coq-community
@@ -82,11 +82,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v30
+      uses: cachix/install-nix-action@v31
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup metacoq
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, coq-community
@@ -115,10 +115,11 @@ jobs:
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
         --argstr job "equations"
-  metacoq:
+  metarocq:
     needs:
     - coq
     - equations
+    - stdlib
     runs-on: ubuntu-latest
     steps:
     - name: Determine which commit to initially checkout
@@ -145,19 +146,19 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v30
+      uses: cachix/install-nix-action@v31
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup metacoq
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, coq-community
         name: metacoq
     - id: stepGetDerivation
-      name: Getting derivation for current job (metacoq)
+      name: Getting derivation for current job (metarocq)
       run: "NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link \\\n   --argstr bundle
-        \"rocq-dev\" --argstr job \"metacoq\" \\\n   --dry-run 2> err > out || (touch
+        \"rocq-dev\" --argstr job \"metarocq\" \\\n   --dry-run 2> err > out || (touch
         fail; true)\n"
     - name: Error reporting
       run: "echo \"out=\"; cat out\necho \"err=\"; cat err\n"
@@ -175,25 +176,13 @@ jobs:
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
         --argstr job "equations"
     - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: metacoq-safechecker-plugin'
+      name: 'Building/fetching previous CI target: stdlib'
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
-        --argstr job "metacoq-safechecker-plugin"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: metacoq-erasure-plugin'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
-        --argstr job "metacoq-erasure-plugin"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: metacoq-translations'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
-        --argstr job "metacoq-translations"
-    - if: steps.stepCheck.outputs.status == 'built'
-      name: 'Building/fetching previous CI target: metacoq-quotation'
-      run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
-        --argstr job "metacoq-quotation"
+        --argstr job "stdlib"
     - if: steps.stepCheck.outputs.status == 'built'
       name: Building/fetching current CI target
       run: NIXPKGS_ALLOW_UNFREE=1 nix-build --no-out-link --argstr bundle "rocq-dev"
-        --argstr job "metacoq"
+        --argstr job "metarocq"
   stdlib:
     needs:
     - coq
@@ -223,11 +212,11 @@ jobs:
         fetch-depth: 0
         ref: ${{ env.tested_commit }}
     - name: Cachix install
-      uses: cachix/install-nix-action@v30
+      uses: cachix/install-nix-action@v31
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: Cachix setup metacoq
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v16
       with:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
         extraPullNames: coq, coq-community
