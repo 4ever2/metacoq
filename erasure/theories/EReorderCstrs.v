@@ -467,7 +467,8 @@ Section reorder_proofs.
 
   Lemma lookup_constant_reorder c : option_map (reorder_constant_decl m) (lookup_constant Σ c) = lookup_constant (reorder_env m Σ) c.
   Proof.
-    rewrite /lookup_constant lookup_env_reorder.
+    rewrite /lookup_constant.
+    rewrite lookup_env_reorder.
     destruct lookup_env => //=.
     destruct g => //.
   Qed.

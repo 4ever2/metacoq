@@ -665,10 +665,16 @@ Qed.
 Import EProgram EGlobalEnv.
 
 #[global]
-Axiom betared_transformation_ext :
+Lemma betared_transformation_ext :
   forall (efl : EEnvFlags) (wfl : WcbvFlags),
   TransformExt.t (betared_transformation efl wfl)
     (fun p p' => extends p.1 p'.1) (fun p p' => extends p.1 p'.1).
+Proof.
+  unfold TransformExt.t.
+  intros.
+
+
+  EGenericGlobalMap.gen_transform_extends
 
 #[global]
 Axiom betared_transformation_ext' :

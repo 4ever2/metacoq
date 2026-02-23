@@ -87,12 +87,94 @@ Coercion forget_inlining_info : inlined_program >-> eprogram.
 
 Definition eval_inlined_program wfl (pr : inlined_program) := eval_eprogram wfl pr.
 
-Axiom trust_inlining_wf :
+Lemma fold_right_rev_left :
+  forall [A B : Type] (f : B -> A -> B) (l : list A) (i : B),
+  fold_left f (rev l) i = fold_right (fun (x : A) (y : B) => f y x) i l.
+Proof. Admitted.
+
+Lemma fresh_inline_env {Σ : global_context} :
+  forall kn inlining,
+  fresh_global kn Σ -> fresh_global kn (inline_env inlining Σ).1.
+Proof. Admitted.
+
+Lemma inlining_env_wf {efl : EEnvFlags} {Σ : global_context} :
+  WcbvFlags ->
+  forall inlining : inlining,
+  wf_glob Σ -> wf_glob (inline_env inlining Σ).1.
+Proof.
+  intros flags inlining wfΣ.
+  induction Σ using rev_ind.
+  - assumption.
+  - assert (wfl : wf_glob l) by admit.
+    assert (wfx : wf_glob [x]) by admit. clear wfΣ.
+    apply IHΣ in wfl. clear IHΣ.
+    unfold  inline_env in *.
+    rewrite rev_app. cbn [rev].
+    rewrite fold_left_app.
+    cbn.
+    Search (fold_left _ (_ ++ _) _).
+
+  induction wfΣ.
+  - constructor.
+  - destruct d.
+    + admit.
+    + cbn. constructor.
+  induction Σ.
+  - assumption.
+  - inversion H0; subst.
+    apply IHΣ in H3; clear IHΣ.
+    apply fresh_inline_env with (inlining := inlining0) in H5.
+    unfold inline_env.
+    rewrite rev_cons.
+    rewrite fold_left_app.
+    unfold inline_env in *.
+    destruct (fold_left _ (rev _) _).
+    cbn in *.
+    destruct d; cbn.
+    + constructor; auto.
+      cbn -[inline_constant_decl].
+        cbn in H4.
+    + constructor; auto.
+Admitted.
+
+
+
+Lemma q : forall inlining0 Σ t,
+    (forget_inlining_info (inline_program inlining0 (Σ, t))).1
+    = (inline_env inlining0 Σ).1.
+Proof.
+  intros.
+  unfold inline_program.
+  cbn [fst].
+  destruct (inline_env inlining0 Σ).
+  reflexivity.
+Qed.
+
+Lemma trust_inlining_wf :
   forall efl : EEnvFlags,
   WcbvFlags ->
   forall inlining : inlining,
   forall (input : Transform.program _ term),
   wf_eprogram efl input -> wf_eprogram efl (inline_program inlining input).
+Proof.
+  intros.
+  destruct input.
+  unfold wf_eprogram in *.
+  cbn in *.
+  destruct H0.
+  split.
+  - rewrite q.
+    apply inlining_env_wf; auto.
+  - admit.
+Admitted.
+
+
+
+Lemma optimize_env_wf {efl : EEnvFlags} {Σ : GlobalContextMap.t} :
+  has_tBox -> has_tRel ->
+  wf_glob Σ -> wf_glob (efl := disable_projections_env_flag efl) (optimize_env Σ).
+Proof.
+Proof.
 Axiom trust_inlining_pres :
   forall (efl : EEnvFlags) (wfl : WcbvFlags) inlining (p : Transform.program _ term)
   (v : term),
@@ -173,4 +255,3 @@ Proof.
   intros ? ? [[] ?] [[] ?]; cbn.
   now rewrite /extends_inlined_eprogram /extends_eprogram /=.
 Qed.
-
