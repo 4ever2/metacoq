@@ -21,8 +21,8 @@ Definition replace_char (orig : ascii) (new : ascii) : String.string -> String.s
     end.
 
 Definition get_def_name (name : kername) : string :=
-  let s_name := bytestring.String.to_string (string_of_kername name) in
-  bytestring.String.of_string (replace_char "." "_" s_name).
+  let s_name := Bytestring.String.to_string (string_of_kername name) in
+  Bytestring.String.of_string (replace_char "." "_" s_name).
 
 Definition change_modpath (mpath : modpath) (suffix : string) (to_rename : kername -> bool)
   : term -> term :=

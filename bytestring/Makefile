@@ -3,10 +3,6 @@ all: coq
 coq: Makefile.rocq
 	$(MAKE) -f Makefile.rocq
 
-_RocqProject: _RocqProject.in metarocq-config
-	cat metarocq-config > _RocqProject
-	cat _RocqProject.in >> _RocqProject
-
 .PHONY: install html clean mrproper all
 
 install: Makefile.rocq

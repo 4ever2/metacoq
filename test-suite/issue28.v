@@ -1,4 +1,4 @@
-From MetaRocq Require Import Template.All Utils.bytestring Template.Pretty.
+From MetaRocq Require Import Template.All Utils.Bytestring Template.Pretty.
 From Stdlib Require Export List.
 Open Scope bs_scope.
 Import ListNotations.

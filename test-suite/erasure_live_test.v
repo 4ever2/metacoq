@@ -10,7 +10,7 @@ From MetaRocq.ErasurePlugin Require Import Erasure.
 From Stdlib Require Import String.
 Local Open Scope string_scope.
 
-From MetaRocq.Utils Require Import utils bytestring.
+From MetaRocq.Utils Require Import utils Bytestring.
 From MetaRocq.Common Require Import config.
 Import MRMonadNotation.
 Unset MetaRocq Debug.

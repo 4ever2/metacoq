@@ -1,5 +1,5 @@
 (* Some tests for the notations of quoting *)
-From MetaRocq.Utils Require Import bytestring.
+From MetaRocq.Utils Require Import Bytestring.
 From MetaRocq.Template Require Loader.
 Local Open Scope bs_scope.
 Local Open Scope nat_scope.

@@ -16,7 +16,7 @@ Abort.
 (* Let's compare some timing numbers *)
 Module TCMonomorphic.
   Import MRMonadNotation.
-  Import bytestring.
+  Import Bytestring.
   Local Unset Universe Polymorphism.
   (* We use monomorphic universes for performance *)
   Monomorphic Universes fixa fixb fixt fixu.
@@ -45,7 +45,7 @@ Module TC.
   (* idk why this is needed... *)
   #[local] Hint Extern 1 (Monad _) => refine TemplateMonad_Monad : typeclass_instances.
   Import MRMonadNotation.
-  Import bytestring.
+  Import Bytestring.
   Local Unset Universe Checking.
   Definition tmFix {A B} (f : (A -> TemplateMonad B) -> (A -> TemplateMonad B)) : A -> TemplateMonad B
     := f
@@ -65,7 +65,7 @@ Module Unquote.
   Import MRMonadNotation.
   Import MetaRocq.Common.Universes.
   Import MetaRocq.Template.Ast.
-  Import bytestring.
+  Import Bytestring.
   Import ListNotations.
   Local Set Universe Polymorphism.
   Local Unset Universe Minimization ToSet.
@@ -139,7 +139,7 @@ Module NoGuard.
   Import MRMonadNotation.
   Import MetaRocq.Common.Universes.
   Import MetaRocq.Template.Ast.
-  Import bytestring.
+  Import Bytestring.
   Import ListNotations.
   Local Set Universe Polymorphism.
   Local Unset Universe Minimization ToSet.

@@ -4,7 +4,8 @@ From Equations Require Import Equations.
 Set Equations Transparent.
 
 From MetaRocq.PCUIC Require Import PCUICAstUtils.
-From MetaRocq.Utils Require Import MRList bytestring utils monad_utils.
+From Bytestring Require Import Bytestring.
+From MetaRocq.Utils Require Import MRList utils monad_utils.
 From MetaRocq.Erasure Require Import EProgram EPrimitive EAst ESpineView EEtaExpanded EInduction ERemoveParams Erasure EGlobalEnv
   EAstUtils ELiftSubst EWellformed ECSubst EWcbvEval.
 

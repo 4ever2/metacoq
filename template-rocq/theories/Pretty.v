@@ -114,7 +114,7 @@ Section print_term.
 End print_term.
 
 Module PrintTermTree.
-  Import bytestring.Tree.
+  Import Bytestring.Tree.
   Infix "^" := append.
 
   Section env.
@@ -138,7 +138,7 @@ Module PrintTermTree.
     | sType l =>
       if with_universes then
         ("Type(" ++
-           MRString.string_of_list string_of_level_expr (LevelExprSet.elements l) ++
+           BytestringUtils.string_of_list string_of_level_expr (LevelExprSet.elements l) ++
           ")")%bs
        else "Type"
     end.
@@ -208,7 +208,7 @@ Module PrintTermTree.
         let ret_binders := firstn #|pcontext p| Γret in
         let (as_name, indices) := (hd "_" ret_binders, MRList.rev (tail ret_binders)) in
         let in_args := (repeat "_" #|pparams p| ++ indices)%list in
-        let in_str := oib.(ind_name) ^ concat "" (map (fun a : bytestring.string => " " ^ a) in_args) in
+        let in_str := oib.(ind_name) ^ concat "" (map (fun a : Bytestring.string => " " ^ a) in_args) in
 
         let fix print_branch Γ names prbr {struct names} :=
             match names with

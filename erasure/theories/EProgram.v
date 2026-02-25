@@ -8,7 +8,7 @@ From MetaRocq.PCUIC Require PCUICAst PCUICAstUtils PCUICProgram.
 From MetaRocq.Erasure Require EAstUtils EWellformed EEnvMap EGlobalEnv EWcbvEval.
 Import EEnvMap.
 
-Import bytestring.
+Import Bytestring.
 Local Open Scope bs.
 Local Open Scope string_scope2.
 
@@ -18,7 +18,7 @@ Local Obligation Tactic := program_simpl.
 
 Import EGlobalEnv EWellformed.
 
-Definition inductive_mapping : Set := Kernames.inductive * (bytestring.string * list nat).
+Definition inductive_mapping : Set := Kernames.inductive * (Bytestring.string * list nat).
 Definition inductives_mapping := list inductive_mapping.
 
 Definition eprogram := (EAst.global_context * EAst.term).

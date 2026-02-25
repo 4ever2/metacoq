@@ -1,7 +1,7 @@
 
 (* Distributed under the terms of the MIT license. *)
 From Stdlib Require Import Lia MSetList OrderedTypeAlt OrderedTypeEx FMapAVL FMapFacts MSetAVL MSetFacts MSetProperties.
-From MetaRocq.Utils Require Import utils MRMSets MRFSets.
+From MetaRocq.Utils Require Import utils MRMSets MRFSets MRString.
 From Stdlib Require Import ssreflect.
 From Equations Require Import Equations.
 

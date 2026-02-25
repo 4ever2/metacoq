@@ -1,4 +1,4 @@
-From MetaRocq.Utils Require Export bytestring.
+From Bytestring Require Export Bytestring.
 From MetaRocq.Utils Require Import utils MRList.
 From MetaRocq.Common Require Import MonadBasicAst.
 From MetaRocq.Template Require Import MonadAst TemplateMonad Ast Loader.

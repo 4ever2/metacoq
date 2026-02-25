@@ -1,5 +1,5 @@
 
-all: printconf template-rocq pcuic safechecker erasure erasure-plugin safechecker-plugin quotation
+all: printconf template-rocq pcuic safechecker erasure erasure-plugin safechecker-plugin quotation bytestring
 
 -include Makefile.conf
 
@@ -12,7 +12,7 @@ ifeq '$(METAROCQ_CONFIG)' 'local'
   export OCAMLPATH
 endif
 
-.PHONY: printconf all utils template-rocq pcuic erasure install uninstall html clean mrproper safechecker-plugin .merlin test-suite translations quotation
+.PHONY: printconf all utils template-rocq pcuic erasure install uninstall html clean mrproper safechecker-plugin .merlin test-suite translations quotation bytestring
 
 printconf:
 ifeq '$(METAROCQ_CONFIG)' 'local'
@@ -27,6 +27,7 @@ endif
 endif
 
 install: all
+	$(MAKE) -C bytestring install
 	$(MAKE) -C utils install
 	$(MAKE) -C common install
 	$(MAKE) -C template-rocq install
@@ -39,6 +40,7 @@ install: all
 	$(MAKE) -C erasure-plugin install
 
 uninstall:
+	$(MAKE) -C bytestring uninstall
 	$(MAKE) -C utils uninstall
 	$(MAKE) -C common uninstall
 	$(MAKE) -C template-rocq uninstall
@@ -54,6 +56,7 @@ uninstall:
 html: all
 	"coqdoc" --multi-index -toc -utf8 -html \
     --with-header ./html/resources/header.html --with-footer ./html/resources/footer.html \
+		-R bytestring/theories Bytestring \
 		-R utils/theories MetaRocq.Utils \
 		-R common/theories MetaRocq.Common \
 		-R template-rocq/theories MetaRocq.Template \
@@ -69,6 +72,7 @@ html: all
 		-d html */theories/*.v */theories/*/*.v translations/*.v examples/*.v
 
 clean:
+	$(MAKE) -C bytestring clean
 	$(MAKE) -C utils clean
 	$(MAKE) -C common clean
 	$(MAKE) -C template-rocq clean
@@ -84,6 +88,7 @@ clean:
 	$(MAKE) -C translations clean
 
 vos:
+	$(MAKE) -C bytestring
 	$(MAKE) -C utils
 	$(MAKE) -C common
 	$(MAKE) -C template-rocq
@@ -97,6 +102,7 @@ vos:
 	$(MAKE) -C translations vos
 
 quick:
+	$(MAKE) -C bytestring
 	$(MAKE) -C utils
 	$(MAKE) -C common
 	$(MAKE) -C template-rocq
@@ -110,6 +116,7 @@ quick:
 	$(MAKE) -C translations quick
 
 mrproper:
+	$(MAKE) -C bytestring mrproper
 	$(MAKE) -C utils mrproper
 	$(MAKE) -C common mrproper
 	$(MAKE) -C template-rocq mrproper
@@ -136,7 +143,10 @@ mrproper:
 	$(MAKE) -C erasure .merlin
 	$(MAKE) -C erasure-plugin .merlin
 
-utils:
+bytestring:
+	$(MAKE) -C bytestring
+
+utils: bytestring
 	$(MAKE) -C utils
 
 common: utils
@@ -167,6 +177,7 @@ erasure-plugin: erasure template-pcuic
 	$(MAKE) -C erasure-plugin
 
 install-plugins: erasure-plugin safechecker-plugin
+	$(MAKE) -C bytestring install
 	$(MAKE) -C utils install
 	$(MAKE) -C common install
 	$(MAKE) -C template-rocq install

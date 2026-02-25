@@ -1,60 +1,42 @@
-From Stdlib Require Import ssreflect ssrbool Decimal DecimalString ZArith.
-From MetaRocq.Utils Require Import MRCompare bytestring ReflectEq.
+From Stdlib Require Import Strings.Byte.
+From Bytestring Require Import ByteCompare Bytestring ByteCompareSpec.
+From MetaRocq.Utils Require Import MRCompare ReflectEq.
+From Bytestring Require Export BytestringUtils.
 
-Local Open Scope bs.
-Notation string := String.t.
 
-(** When defining [Show] instance for your own datatypes, you sometimes need to
-    start a new line for better printing. [nl] is a shorthand for it. *)
-Definition nl : string := String.String "010"%byte String.EmptyString.
+Global Program Instance byte_reflect_eq : ReflectEq byte :=
+  {| ReflectEq.eqb := ByteCompare.eqb |}.
+Next Obligation.
+  rewrite ByteCompareSpec.eqb_compare.
+  destruct (compare_spec x y); constructor; auto.
+  all:apply lt_not_eq in H.
+  - assumption.
+  - now apply not_eq_sym.
+Qed.
 
-Definition string_of_list_aux {A} (f : A -> string) (sep : string) (l : list A) : string :=
-  let fix aux l :=
-      match l return string with
-      | nil => ""
-      | cons a nil => f a
-      | cons a l => f a ++ sep ++ aux l
-      end
-  in aux l.
+From Stdlib Require Import Orders.
+Module StringOT <: UsualOrderedType.
+Include Bytestring.StringOT.
 
-Definition string_of_list {A} (f : A -> string) (l : list A) : string :=
-  "[" ++ string_of_list_aux f "," l ++ "]".
+#[global] Program Instance reflect_eq_string : ReflectEq String.t := {
+  eqb := String.eqb
+}.
+Next Obligation.
+  rename x into s, y into s'.
+  destruct (String.eqb s s') eqn:e; constructor.
+  - rewrite String.eqb_compare in e. fold (compare s s') in e.
+    now destruct (StringOT.compare_spec s s').
+  - rewrite String.eqb_compare in e.
+    fold (compare s s') in e.
+    destruct (StringOT.compare_spec s s').
+    now apply lt_not_eq.
+    now apply lt_not_eq.
+    now apply not_eq_sym, lt_not_eq.
+Qed.
+End StringOT.
 
-Definition print_list {A} (f : A -> string) (sep : string) (l : list A) : string :=
-  string_of_list_aux f sep l.
+Module StringOTOrig := OrdersAlt.Backport_OT StringOT.
 
-Definition parens (top : bool) (s : string) :=
-  if top then s else "(" ++ s ++ ")".
-
-Local Infix "::" := String.String.
-
-Fixpoint string_of_uint n :=
-  match n with
-  | Nil => ""
-  | D0 n => "0" :: string_of_uint n
-  | D1 n => "1" :: string_of_uint n
-  | D2 n => "2" :: string_of_uint n
-  | D3 n => "3" :: string_of_uint n
-  | D4 n => "4" :: string_of_uint n
-  | D5 n => "5" :: string_of_uint n
-  | D6 n => "6" :: string_of_uint n
-  | D7 n => "7" :: string_of_uint n
-  | D8 n => "8" :: string_of_uint n
-  | D9 n => "9" :: string_of_uint n
-  end.
-
-Definition string_of_nat n : string :=
-  string_of_uint (Nat.to_uint n).
-
-#[global]
-Hint Resolve String.string_dec : eq_dec.
-
-Definition string_of_positive p :=
-  string_of_uint (Pos.to_uint p).
-
-Definition string_of_Z (z : Z) : string :=
-  match z with
-  | Z0 => "0"
-  | Zpos p => string_of_positive p
-  | Zneg p => "-" ++ string_of_positive p
-  end.
+Notation string_compare := StringOT.compare.
+Notation string_compare_eq := StringOT.compare_eq.
+Notation CompareSpec_string := StringOT.compare_spec.

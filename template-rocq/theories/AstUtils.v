@@ -12,7 +12,7 @@ From Stdlib Require Import ZArith.
 (** Raw term printing *)
 
 Module string_of_term_tree.
-  Import bytestring.Tree.
+  Import Bytestring.Tree.
   Infix "^" := append.
 
   Definition string_of_predicate {term} (f : term -> t) (p : predicate term) :=

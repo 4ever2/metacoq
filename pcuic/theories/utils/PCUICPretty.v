@@ -114,7 +114,7 @@ End fresh.
 Module PrintTermTree.
   Section env.
     Context (Σ : global_env_ext).
-    Import bytestring.Tree.
+    Import Bytestring.Tree.
     Infix "^" := append.
 
     Definition print_prim (soft : term -> Tree.t) (p : prim_val) : Tree.t :=
@@ -272,7 +272,7 @@ Module PrintTermTree.
     end.
   End env.
 
-  Import bytestring.Tree.
+  Import Bytestring.Tree.
   Infix "^" := append.
 
   Section env.

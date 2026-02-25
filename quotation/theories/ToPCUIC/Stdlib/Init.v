@@ -1,6 +1,6 @@
 From Stdlib Require Import Lists.List.
 From MetaRocq.Quotation.ToPCUIC Require Export Init.
-From MetaRocq.Utils Require Export bytestring. (* for display of quoted objects *)
+From Bytestring Require Export Bytestring. (* for display of quoted objects *)
 From MetaRocq.Utils Require Export ReflectEq.
 From MetaRocq.Utils Require Import All_Forall.
 From Equations.Prop Require Import Classes.

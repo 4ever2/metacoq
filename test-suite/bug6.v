@@ -1,5 +1,5 @@
 From MetaRocq Require Import Template.Loader.
-Import bytestring.
+Import Bytestring.
 
 Definition I (t:Type) (x:t) : t := x.
 Definition II := I (forall t:Type, t -> t) I.

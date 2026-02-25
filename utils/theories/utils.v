@@ -19,7 +19,7 @@ Global Open Scope nat_scope.
 
 (** We keep [++] for lists and use [^] for stings. *)
 Declare Scope string_scope2.
-Notation "s1 ^ s2" := (bytestring.String.append s1 s2) : string_scope2.
+Notation "s1 ^ s2" := (Bytestring.String.append s1 s2) : string_scope2.
 Open Scope string_scope2.
 
 (** We want [*] from type_scope but [+] from nat_scope. *)

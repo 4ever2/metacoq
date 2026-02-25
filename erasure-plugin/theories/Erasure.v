@@ -12,7 +12,7 @@ From MetaRocq.ErasurePlugin Require Import ETransform.
 Import PCUICProgram.
 Import PCUICTransform (template_to_pcuic_transform, pcuic_expand_lets_transform).
 
-Import bytestring.
+Import Bytestring.
 Local Open Scope bs.
 Local Open Scope string_scope2.
 

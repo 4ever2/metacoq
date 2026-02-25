@@ -5132,7 +5132,7 @@ Qed.
 
 Import MRMonadNotation ResultMonad.
 From Stdlib Require Import String.
-Definition compute_masks overridden_masks (do_trim_const_masks do_trim_ctor_masks : bool) Σ : result dearg_set bytestring.string :=
+Definition compute_masks overridden_masks (do_trim_const_masks do_trim_ctor_masks : bool) Σ : result dearg_set Bytestring.string :=
   let (const_masks, ind_masks) := Utils.timed "Dearg analysis" (fun _ => analyze_env overridden_masks Σ) in
   let const_masks := (if do_trim_const_masks then trim_const_masks else id) const_masks in
   let ind_masks := (if do_trim_ctor_masks then trim_ind_masks else id) ind_masks in

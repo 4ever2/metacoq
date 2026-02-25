@@ -1,5 +1,6 @@
 From Stdlib Require Import PArith Sint63 String Uint63 PrimFloat SpecFloat FloatOps PString.
-From MetaRocq.Utils Require Import bytestring MRString.
+From Bytestring Require Import Bytestring.
+From MetaRocq.Utils Require Import MRString.
 
 (* Circumventing https://github.com/coq/coq/issues/19150 (via PString). *)
 Ltac Zify.zify_post_hook ::= idtac.
@@ -11,10 +12,10 @@ Global Hint Mode Show ! : typeclass_instances.
 
 #[export] Instance show_bytestring : Show string := fun x => x.
 
-#[export] Instance show_string : Show String.string := bytestring.String.of_string.
+#[export] Instance show_string : Show String.string := Bytestring.String.of_string.
 
 Definition string_show {A} {show : Show A} : A -> String.string :=
-  fun a => bytestring.String.to_string (show a).
+  fun a => Bytestring.String.to_string (show a).
 
 #[export] Instance nat_show : Show nat := string_of_nat.
 

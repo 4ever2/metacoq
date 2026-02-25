@@ -1,13 +1,13 @@
 (* Distributed under the terms of the MIT license. *)
-From MetaRocq.Utils Require Import bytestring.
+From Bytestring Require Import Bytestring.
 From MetaRocq.Common Require Import BasicAst uGraph.
 From MetaRocq.Template Require Import TemplateMonad TemplateMonad.Extractable.
 
 (* Base types *)
 
-Register bytestring.String.t as metarocq.string.type.
-Register bytestring.String.EmptyString as metarocq.string.nil.
-Register bytestring.String.String as metarocq.string.cons.
+Register Bytestring.String.t as metarocq.string.type.
+Register Bytestring.String.EmptyString as metarocq.string.nil.
+Register Bytestring.String.String as metarocq.string.cons.
 
 Register Corelib.Init.Byte.byte as metarocq.byte.type.
 

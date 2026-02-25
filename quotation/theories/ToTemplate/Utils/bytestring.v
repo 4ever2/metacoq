@@ -1,5 +1,5 @@
 From MetaRocq.Quotation.ToTemplate Require Import Stdlib.Init.
-From MetaRocq.Utils Require Import bytestring.
+From Bytestring Require Import Bytestring.
 
 Module String.
   #[export] Instance quote_t : ground_quotable String.t := ltac:(induction 1; exact _).

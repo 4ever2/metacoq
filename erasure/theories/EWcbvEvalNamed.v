@@ -5,7 +5,8 @@ From MetaRocq.Utils Require Import utils.
 From MetaRocq.PCUIC Require PCUICWcbvEval.
 From MetaRocq.Erasure Require Import EPrimitive EAst EAstUtils ELiftSubst ECSubst EReflect EGlobalEnv
   EWellformed EWcbvEval.
-From MetaRocq.Utils Require Import bytestring MRString.
+From Bytestring Require Import Bytestring.
+From MetaRocq.Utils Require Import MRString.
 From MetaRocq.Erasure Require Import EWcbvEvalCstrsAsBlocksFixLambdaInd.
 From Stdlib Require Import BinaryString.
 Import String.

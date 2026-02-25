@@ -40,6 +40,8 @@ gen-src/byteCompareSpec.ml
 gen-src/byteCompareSpec.mli
 gen-src/bytestring.ml
 gen-src/bytestring.mli
+gen-src/bytestringUtils.ml
+gen-src/bytestringUtils.mli
 gen-src/cRelationClasses.ml
 gen-src/cRelationClasses.mli
 gen-src/caml_byte.ml

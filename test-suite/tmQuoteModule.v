@@ -1,4 +1,4 @@
-From MetaRocq.Utils Require Import bytestring.
+From MetaRocq.Utils Require Import Bytestring.
 From MetaRocq.Template Require Import Loader All.
 Import MRMonadNotation.
 Module Foo.

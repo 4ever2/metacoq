@@ -22,17 +22,16 @@ authors: ["Abhishek Anand <aa755@cs.cornell.edu>"
 license: "MIT"
 build: [
   ["bash" "./configure.sh"]
-  [make "-j" "%{jobs}%" "utils"]
+  [make "-j" "%{jobs}%" "bytestring"]
 ]
 install: [
-  [make "-C" "utils" "install"]
+  [make "-C" "bytestring" "install"]
 ]
 depends: [
   "stdlib-shims"
   "rocq-core" { = "9.1.0" }
   "rocq-stdlib" { >= "9.0~" & != "9.0.dev" & < "10" }
   "rocq-equations" { >= "1.3.1" }
-  "rocq-bytestring" {= version}
 ]
 synopsis: "The utility library of Template Rocq and PCUIC"
 description: """

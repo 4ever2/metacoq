@@ -69,6 +69,7 @@ MROption
 MRProd
 MRCompare
 Bytestring
+BytestringUtils
 Caml_bytestring
 Monad_utils
 Sumbool

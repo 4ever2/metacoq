@@ -1,0 +1,8 @@
+-R theories Bytestring
+
+# utils
+theories/ByteCompare.v
+theories/ByteCompare_opt.v
+theories/ByteCompareSpec.v
+theories/Bytestring.v
+theories/BytestringUtils.v

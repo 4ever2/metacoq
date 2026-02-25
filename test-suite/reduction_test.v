@@ -1,5 +1,5 @@
 From Stdlib Require Import Recdef.
-From MetaRocq.Utils Require Import bytestring.
+From MetaRocq.Utils Require Import Bytestring.
 From MetaRocq.Template Require Import TemplateMonad Loader.
 (* From MetaRocq.SafeChecker Require Import SafeTemplateChecker. *)
 From MetaRocq.PCUIC Require Import PCUICEquality PCUICAst PCUICReflect PCUICSafeLemmata PCUICTyping PCUICNormal PCUICAstUtils PCUICSN.
@@ -7,7 +7,7 @@ From MetaRocq.TemplatePCUIC Require Import TemplateToPCUIC PCUICToTemplate.
 From Stdlib Require Import String.
 Local Open Scope string_scope.
 
-From MetaRocq.Utils Require Import utils bytestring.
+From MetaRocq.Utils Require Import utils Bytestring.
 From MetaRocq.Common Require Import config.
 
 Import MRMonadNotation.

@@ -177,5 +177,5 @@ Inductive fresh_globals : global_env -> Prop :=
 Definition trans_env (Σ : global_env) : EAst.global_context :=
   map (fun d => (d.1.1, trans_global_decl d.2)) Σ.
 
-Definition print_term (Σ : global_env) (t : term) : bytestring.String.t :=
+Definition print_term (Σ : global_env) (t : term) : Bytestring.String.t :=
   EPretty.print_program (trans_env Σ,t).

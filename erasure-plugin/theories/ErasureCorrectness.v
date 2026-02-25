@@ -1,7 +1,8 @@
 (* Distributed under the terms of the MIT license. *)
 From Stdlib Require Import Program ssreflect ssrbool.
 From MetaRocq.Common Require Import Transform config.
-From MetaRocq.Utils Require Import bytestring utils.
+From Bytestring Require Import Bytestring.
+From MetaRocq.Utils Require Import utils.
 From MetaRocq.PCUIC Require PCUICAst PCUICAstUtils PCUICProgram.
 From MetaRocq.PCUIC Require Import PCUICNormal.
 From MetaRocq.SafeChecker Require Import PCUICErrors PCUICWfEnvImpl.

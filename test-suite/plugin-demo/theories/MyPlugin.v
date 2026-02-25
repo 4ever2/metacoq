@@ -1,5 +1,5 @@
 From Stdlib Require Import Lists.List.
-From MetaRocq.Utils Require Import bytestring.
+From MetaRocq.Utils Require Import Bytestring.
 From MetaRocq.Common Require Import BasicAst.
 From MetaRocq.Template Require Import Ast Loader TemplateMonad.Extractable.
 Import TemplateMonad.Extractable.

@@ -3,7 +3,7 @@ From MetaRocq.Common Require Import config Transform.
 From MetaRocq.Template Require Import TemplateProgram Pretty EtaExpand All Loader.
 Import ListNotations.
 Import MRMonadNotation.
-Import bytestring.
+Import Bytestring.
 Open Scope bs_scope.
 
 #[local] Existing Instance config.default_checker_flags.

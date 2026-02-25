@@ -13,8 +13,7 @@ From Stdlib Require Import Lia.
 From Equations Require Import Equations.
 Set Primitive Projections.
 Set Default Proof Using "Type".
-From MetaRocq.Utils Require Import MRCompare ReflectEq.
-From MetaRocq.Utils Require ByteCompare ByteCompareSpec.
+From Bytestring Require ByteCompare ByteCompareSpec.
 (** bytes *)
 
 Definition byte_parse (b : Byte.byte) : Byte.byte := b.
@@ -245,10 +244,17 @@ Module OT_byte <: OrderedType.OrderedType with Definition t := Byte.byte.
     apply CompOpp_iff in pf. apply pf.
   Defined.
 
-  Definition eq_dec : forall x y : t, {eq x y} + {not (eq x y)} := Classes.eq_dec.
+  Definition eq_dec : forall x y : t, {eq x y} + {not (eq x y)}.
+  Proof.
+    apply Byte.byte_eq_dec.
+  Defined.
 End OT_byte.
 
-Global Instance byte_eqdec : Classes.EqDec Byte.byte := _.
+Global Instance byte_eqdec : Classes.EqDec Byte.byte.
+Proof.
+  unfold EqDec.
+  apply Byte.byte_eq_dec.
+Defined.
 
 Module StringOT <: UsualOrderedType.
   Definition t := string.
@@ -310,19 +316,17 @@ Module StringOT <: UsualOrderedType.
     rewrite ByteCompareSpec.compare_eq_refl in H. auto.
   Qed.
 
-  #[global] Program Instance reflect_eq_string : ReflectEq t := {
-    eqb := eqb
-  }.
-  Next Obligation.
-    rename x into s, y into s'.
-    destruct (eqb s s') eqn:e; constructor.
-    - rewrite String.eqb_compare in e. fold (compare s s') in e.
-      now destruct (compare_spec s s').
-    - rewrite String.eqb_compare in e.
-      fold (compare s s') in e.
-      destruct (compare_spec s s') => //.
-      now apply lt_not_eq. now apply not_eq_sym, lt_not_eq.
-  Qed.
+  Definition string_dec : forall s1 s2 : string, {s1 = s2} + {s1 <> s2}.
+  Proof.
+    decide equality.
+    apply byte_eqdec.
+  Defined.
+
+  Global Instance string_eqdec : Classes.EqDec string.
+  Proof.
+    unfold EqDec.
+    apply string_dec.
+  Defined.
 
   Definition eq_dec : forall x y : t, {eq x y} + {not (eq x y)} := Classes.eq_dec.
 

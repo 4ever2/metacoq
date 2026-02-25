@@ -1,5 +1,5 @@
 From Stdlib Require Import Strings.Byte NArith Eqdep_dec.
-From MetaRocq.Utils Require Import ReflectEq ByteCompare.
+From Bytestring Require Import ByteCompare.
 From Equations Require Import Equations.
 
 Derive NoConfusion for comparison.
@@ -39,8 +39,6 @@ Proof.
   - now constructor; apply eq.
   - constructor. now rewrite <- eq.
 Qed.
-
-From MetaRocq Require Import MRCompare.
 
 Definition lt x y := compare x y = Lt.
 
@@ -103,14 +101,4 @@ Proof.
   unfold eqb.
   apply N.eqb_compare.
   (* destruct x; cbn; abstract (destruct y; cbn; exact eq_refl). *)
-Qed.
-
-Global Program Instance byte_reflect_eq : ReflectEq byte :=
-  {| ReflectEq.eqb := eqb |}.
-Next Obligation.
-  rewrite eqb_compare.
-  destruct (compare_spec x y); constructor; auto.
-  all:apply lt_not_eq in H.
-  - assumption.
-  - now apply not_eq_sym.
 Qed.

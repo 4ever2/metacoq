@@ -4,7 +4,8 @@ From Equations Require Import Equations.
 Set Equations Transparent.
 
 From MetaRocq.PCUIC Require Import PCUICAstUtils.
-From MetaRocq.Utils Require Import MRList bytestring utils monad_utils.
+From Bytestring Require Import Bytestring.
+From MetaRocq.Utils Require Import MRList utils monad_utils.
 From MetaRocq.Erasure Require Import EPrimitive EAst EEnvMap EInduction EGlobalEnv.
 
 Import Kernames.
@@ -173,4 +174,3 @@ Proof.
   intros ? ? [[] ?] [[] ?]; cbn.
   now rewrite /extends_inlined_eprogram /extends_eprogram /=.
 Qed.
-

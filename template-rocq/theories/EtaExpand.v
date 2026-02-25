@@ -955,7 +955,7 @@ Proof.
   rewrite /GlobalEnvMap.lookup_constructor /GlobalEnvMap.lookup_inductive /GlobalEnvMap.lookup_minductive hl //.
 Qed.
 
-Import bytestring.String.
+Import Bytestring.String.
 
 Local Open Scope bs.
 

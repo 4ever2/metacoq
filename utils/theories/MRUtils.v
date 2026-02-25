@@ -21,10 +21,9 @@ From MetaRocq.Utils Require Export MRPrelude
         MRTactics.Head
         MRTactics.SpecializeBy
         MRTactics.UniquePose
-        ReflectEq
-        bytestring
-        Show
-.
+        ReflectEq.
+From Bytestring Require Export Bytestring.
+From MetaRocq.Utils Require Export Show.
 
 Tactic Notation "destruct" "?" :=
   let E := fresh "E" in
